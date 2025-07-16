@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bristol Museum of Natural History</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style/stylesheet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+        <img src="images/bnhm_trans.png" alt="BMNH Logo" style="height: 40px;" />
+        <span class="visually-hidden">BMNH</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#exhibits">Current Exhibits</a></li>
+          <li class="nav-item"><a class="nav-link" href="#collection">Permanent Collection</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tours">Tours & Talks</a></li>
+          <li class="nav-item"><a class="nav-link" href="#kids">Kids’ Program</a></li>
+          <li class="nav-item"><a class="nav-link" href="#findus">Find Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#membership">Membership</a></li>
+          <li class="nav-item"><a class="nav-link" href="#hours">Opening Hours</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+     <section id="hero" class="section hero-section d-flex align-items-center text-center text-white">
+      <div class="container text-center">
+        <h1 class="display-4">Explore the Past. Inspire the Future.</h1>
+        <p class="hero-lead">Now open late on Thursdays — discover "History After Dark" until 11PM</p>
+      </div>
+    </section>
+
+    <!-- Current Exhibits -->
+    <section id="exhibits" class="section bg-image exhibits-section">
+      <div class="container">
+        <div class="textbox">
+          <h2 class="section-title">Current Exhibits</h2>
+          <p>Step into a world long gone with "Unearthed Giants," our latest immersive exhibition. Witness life-sized reconstructions of Ice Age mammoths, sabre-toothed cats, and woolly rhinos, brought to life with incredible detail. This exhibit showcases rare fossils unearthed from around the globe, offering a profound glimpse into Earth's most colossal creatures</p>
+          <p>Our interactive displays let you experience what it's like to be a palaeontologist. Use real excavation tools to uncover fossil replicas, and listen to first-hand accounts from leading experts on their most thrilling discoveries. This is a journey through ancient ecosystems that will ignite your sense of adventure.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Permanent Collection -->
+    <section id="collection" class="section bg-image collection-section">
+      <div class="container">
+        <div class="textbox">
+          <h2 class="section-title">Permanent Collection</h2>
+          <p>Journey through millions of years of history in our permanent collection. From the intricate beauty of mineral formations to the awe-inspiring skeletons of ancient sea creatures, our galleries are a celebration of the natural world. Discover meticulously crafted dioramas that recreate historic habitats and explore our vast collection of human artifacts that tell the story of our shared evolutionary path.</p>
+          <p>This foundational exhibit features hands-on specimens and detailed models, providing an accessible and engaging educational experience for visitors of all ages. It is a deep dive into the very fabric of our planet and the life that has shaped it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tours and Talks -->
+    <section id="tours" class="section bg-image tours-section">
+      <div class="container">
+        <div class="textbox">
+          <h2 class="section-title">Tours & Talks</h2>
+          <p>Enhance your visit with a guided tour or an insightful lecture. Our expert guides lead you on behind-the-scenes journeys into our archives and labs, revealing the secrets of our collections. Our guest lecture series features talks by renowned biologists, geologists, and conservationists on topics ranging from the mysteries of deep-sea life to the future of biodiversity.</p>
+          <p>We offer a variety of talks for all interests. Check our website for the full schedule and special events, including our popular "After Dark" lecture series. Advance booking is highly recommended for all events, with most included in your general admission or free for members.</p>
+          <form class="mt-4">
+            <h3 class="section-title">Book a Tour</h3>
+            <p><strong>Tour Prices:</strong> General Tour (£15), Behind-the-Scenes Tour (£25), Private Group Tour (starting from £100).</p>
+            <div class="mb-3">
+              <label for="tour-type" class="form-label">Type of Tour</label>
+              <select class="form-select" id="tour-type">
+                <option selected>Select a tour</option>
+                <option value="general">General Museum Tour</option>
+                <option value="behind-scenes">Behind-the-Scenes Tour</option>
+                <option value="private-group">Private Group Tour</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="tour-date" class="form-label">Date</label>
+              <input type="date" class="form-control" id="tour-date" required>
+            </div>
+            <div class="mb-3">
+              <label for="tour-time" class="form-label">Time Slot</label>
+              <select class="form-select" id="tour-time">
+                <option selected>Select a time</option>
+                <option value="morning">Morning (10:00 AM)</option>
+                <option value="afternoon">Afternoon (2:00 PM)</option>
+                <option value="evening">Evening (7:30 PM - History After Dark)</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="tour-email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="tour-email" placeholder="Your email" required>
+            </div>
+            <button type="submit" class="btn submit-btn">Book Now</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kids Summer Program -->
+    <section id="kids" class="section bg-image kids-section">
+      <div class="container">
+        <div class="textbox">
+          <h2 class="section-title">Summer Program for Kids</h2>
+          <p>Our summer program transforms the museum into a playground of discovery! Designed to spark curiosity and creativity in young explorers, our weekly workshops offer hands-on fossil hunts, model-building challenges, and scientific experiments. Each session is a new adventure, supervised by our team of trained and passionate educators.</p>
+          <p>Open to ages 5-12 with flexible booking options, our program provides a safe and fun environment for children to engage with science through active learning and play. This is where future palaeontologists and naturalists get their start!</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Find Us -->
+    <section id="findus" class="section bg-image findus-section">
+      <div class="container">
+        <div class="textbox">
+          <h2 class="section-title">Find Us</h2>
+          <p>Come visit us on campus! Our museum is easy to reach with easy access to nearby public transport.</p>
+          <div id="map"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Membership -->
+     <section id="membership" class="section bg-image membership-section">
+      <div class="container">
+        <div class="textbox">
+          <h2 class="section-title">Become a Member</h2>
+          <p>Support the museum and gain access to exclusive talks, early exhibit previews, and members-only events. Your support helps us preserve collections and expand educational outreach.</p>
+          <form>
+            <div class="mb-3">
+              <label for="member-name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="member-name" placeholder="Your name" required>
+            </div>
+            <div class="mb-3">
+              <label for="member-email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="member-email" placeholder="Your email" required>
+            </div>
+            <div class="mb-3">
+              <label for="membership-level" class="form-label">Membership Level</label>
+              <select class="form-select" id="membership-level">
+                <option selected>Choose a level</option>
+                <option value="individual">Individual (£40/year)</option>
+                <option value="family">Family (£60/year)</option>
+                <option value="student">Student (£25/year)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn submit-btn">Sign Up & Pay</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Opening Hours -->
+    <section id="hours" class="section bg-image hours-section">
+      <div class="container">
+        <div class="textbox opening-hours">
+          <h2 class="section-title">Opening Hours</h2>
+          <p><span>Monday</span>-<span>10:00 – 17:00</span></p>
+          <p><span>Tuesday</span>-<span>10:00 – 17:00</span></p>
+          <p><span>Wednesday</span>-<span>10:00 – 17:00</span></p>
+          <p><span>Thursday (History After Dark)</span>-<span>10:00 – 23:00</span></p>
+          <p><span>Friday</span>-<span>10:00 – 18:00</span></p>
+          <p><span>Saturday</span>-<span>10:00 – 18:00</span></p>
+          <p><span>Sunday</span>-<span>10:00 – 18:00</span></p>
+          <p>Closed on major holidays.</p>
+        </div>
+      </div>
+    </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section bg-image contact-section">
+    <div class="container d-flex justify-content-center">
+      <div class="contact-box">
+        <form>
+          <h2 class="section-title">Contact Us</h2>
+          <p>Have a question about an exhibit, a specific collection, or an upcoming event? We'd love to hear from you. Please fill out the form below, and a member of our team will get back to you as soon as possible.</p>
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Your name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Your email" />
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" rows="4" placeholder="Your message"></textarea>
+          </div>
+
+          <button type="submit" class="btn submit-btn">Submit</button>
+        </form>
+
+        <div class="contact-illustration">
+          <img src="images/bnhm_bw.png" alt="Museum Icon" />
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-dark text-light">
+    <small>&copy; 2025 Bristol Museum of Natural History. All rights reserved.</small>
+  </footer>
+
+  <!-- JavaScript for Map -->
+  <script>
+    const map = L.map('map').setView([51.4849, -2.5430], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
+    L.circleMarker([51.4849, -2.5430], {
+      radius: 10,
+      color: '#6cb098',
+      fillColor: '#6cb098',
+      fillOpacity: 1
+    }).addTo(map).bindPopup("Natural History Museum – Bristol Campus").openPopup();
+  </script>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
